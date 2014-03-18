@@ -1,0 +1,31 @@
+{
+  "name": "gulp-toml",
+  "version": "0.1.0",
+  "description": "Convert toml to json",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/will-ob/gulp-toml"
+  },
+  "keywords": [
+    "gulpplugin"
+  ],
+  "author": "Will O'Brien <will.obrien@dibit.co>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/will-ob/gulp-toml/issues"
+  },
+  "dependencies": {
+    "gulp-util": "~2.2.14",
+    "toml": "~2.0.4",
+    "through2": "~0.4.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2",
+    "assert": "~1.1.1",
+    "gulp-util": "~2.2.14"
+  }
+}
