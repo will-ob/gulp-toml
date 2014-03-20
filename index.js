@@ -15,19 +15,19 @@ module.exports = function(opts){
     file.path = ext(file.path, opts.ext);
     var obj = toml.parse(file.contents.toString());
     file.contents = new Buffer(opts.to(obj), 'utf8');
-    return file
+    return file;
   }
 
   return through.obj(function(file, enc, cb){
     if(file.isNull()) {
-       this.push(file);
-       return cb();
+      this.push(file);
+      return cb();
     }
     if(file.isStream()) {
       this.emit('error', new gutil.PluginError('gulp-toml', 'Streaming not supported'));
       return cb();
     }
-    this.emit('data', toToml(file));
+    this.push(toToml(file));
     return cb();
   });
 
