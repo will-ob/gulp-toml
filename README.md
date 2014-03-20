@@ -20,7 +20,7 @@ var toml = require('gulp-toml'),
 gulp.task('toml', function(){
 
   gulp.src()
-    .pipe(toml(to: json, ext: '.json')) // defaults
+    .pipe(toml({to: json, ext: '.json'})) // defaults
     .pipe(gulp.dest('./public/'));
 
 });
