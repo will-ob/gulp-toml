@@ -27,7 +27,11 @@ module.exports = function(opts){
       this.emit('error', new gutil.PluginError('gulp-toml', 'Streaming not supported'));
       return cb();
     }
-    this.push(toToml(file));
+    try {
+      this.push(toToml(file));
+    } catch(error) {
+      this.emit('error', new gutil.PluginError('gulp-toml', error.message));
+    }
     return cb();
   });
 
