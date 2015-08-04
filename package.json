@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "gulp-util": "~2.2.14",
-    "toml": "~2.0.4",
+    "toml": "~2.3.0",
     "through2": "~0.4.1"
   },
   "devDependencies": {

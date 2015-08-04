@@ -15,7 +15,7 @@ it('should jsonify the toml', function (cb) {
   stream.on('data', function (file) {
     assert.equal(file.relative, 'example.json');
     assert.equal(file.path, 'test/fixture/example.json');
-    assert.equal(file.contents.toString(), fs.readFileSync('./test/fixture/example.json', 'utf8'));
+    assert.equal(file.contents.toString().trim(), fs.readFileSync('./test/fixture/example.json', 'utf8').trim());
     cb();
   });
 
