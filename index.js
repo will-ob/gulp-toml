@@ -30,7 +30,7 @@ module.exports = function(opts){
     try {
       this.push(toToml(file));
     } catch(error) {
-      this.emit('error', new gutil.PluginError('gulp-toml', error.message));
+      this.emit('error', new gutil.PluginError('gulp-toml', error.message, {'error': error}));
     }
     return cb();
   });
