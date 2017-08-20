@@ -29,3 +29,31 @@ it('should jsonify the toml', function (cb) {
   stream.end();
 });
 
+it('should include error details', function (cb) {
+
+  var stream = gtoml({
+    to: JSON.stringify,
+    ext: '.json'
+  });
+
+  stream.on('error', function(err){
+    assert.ok(err.message  != null);
+    assert.ok(err.expected != null);
+    assert.ok(err.found    != null);
+    assert.ok(err.offset   != null);
+    assert.ok(err.line     != null);
+    assert.ok(err.column   != null);
+
+    cb();
+  })
+
+  stream.write(new gutil.File({
+    cwd: './test',
+    base: './test/fixture',
+    path: './test/fixture/error.toml',
+    contents: fs.readFileSync('./test/fixture/error.toml')
+  }));
+
+  stream.end();
+});
+
