@@ -1,9 +1,10 @@
 'use strict';
 
 var assert = require('assert'),
-    gutil  = require('gulp-util'),
+    File   = require('vinyl'),
     gtoml  = require('../index'),
-    fs     = require('fs');
+    fs     = require('fs'),
+    path   = require('path');;
 
 it('should jsonify the toml', function (cb) {
 
@@ -14,12 +15,12 @@ it('should jsonify the toml', function (cb) {
 
   stream.on('data', function (file) {
     assert.equal(file.relative, 'example.json');
-    assert.equal(file.path, 'test/fixture/example.json');
+    assert.equal(file.path, path.normalize('test/fixture/example.json'));
     assert.equal(file.contents.toString().trim(), fs.readFileSync('./test/fixture/example.json', 'utf8').trim());
     cb();
   });
 
-  stream.write(new gutil.File({
+  stream.write(new File({
     cwd: './test',
     base: './test/fixture',
     path: './test/fixture/example.toml',
@@ -47,7 +48,7 @@ it('should include error details', function (cb) {
     cb();
   })
 
-  stream.write(new gutil.File({
+  stream.write(new File({
     cwd: './test',
     base: './test/fixture',
     path: './test/fixture/error.toml',
