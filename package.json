@@ -1,6 +1,6 @@
 {
   "name": "gulp-toml",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Convert toml to json",
   "main": "index.js",
   "scripts": {
