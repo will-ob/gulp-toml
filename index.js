@@ -1,9 +1,8 @@
 'use strict';
 
-var through  = require('through2'),
-    toml     = require('toml'),
-    gutil    = require('gulp-util'),
-    ext      = gutil.replaceExtension;
+var through     = require('through2'),
+    toml        = require('toml'),
+    PluginError = require('plugin-error');
 
 module.exports = function(opts){
   if(opts == null){opts = {}}
@@ -12,7 +11,7 @@ module.exports = function(opts){
   if(!opts.ext){ opts.ext = ".json" }
 
   var toToml = function (file){
-    file.path = ext(file.path, opts.ext);
+    file.extname = opts.ext;
     var obj = toml.parse(file.contents.toString());
     file.contents = new Buffer(opts.to(obj), 'utf8');
     return file;
@@ -24,13 +23,13 @@ module.exports = function(opts){
       return cb();
     }
     if(file.isStream()) {
-      this.emit('error', new gutil.PluginError('gulp-toml', 'Streaming not supported'));
+      this.emit('error', new PluginError('gulp-toml', 'Streaming not supported'));
       return cb();
     }
     try {
       this.push(toToml(file));
     } catch(error) {
-      this.emit('error', new gutil.PluginError('gulp-toml', error.message, {'error': error}));
+      this.emit('error', new PluginError('gulp-toml', error.message, {'error': error}));
     }
     return cb();
   });
